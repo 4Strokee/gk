@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>You & I ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Segoe UI", sans-serif;
+        overflow: hidden;
+
+        /* romantic gradient */
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4, #ffd1ff);
+        background-size: 400% 400%;
+        animation: bgMove 10s infinite alternate;
+    }
+
+    @keyframes bgMove {
+        from { background-position: left; }
+        to { background-position: right; }
+    }
+
+    .container {
+        text-align: center;
+        z-index: 2;
+    }
+
+    h1 {
+        font-size: 46px;
+        color: #b30059;
+        margin-bottom: 40px;
+    }
+
+    /* buttons */
+    #yesBtn, #noBtn {
+        font-size: 18px;
+        padding: 12px 28px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        margin: 10px;
+        transition: 0.3s;
+    }
+
+    #yesBtn {
+        background: #ff3366;
+        color: white;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    #yesBtn:hover {
+        transform: scale(1.1);
+    }
+
+    #noBtn {
+        background: gray;
+        color: white;
+        position: absolute;
+    }
+
+    /* result section */
+    #meme {
+        display: none;
+        margin-top: 30px;
+        animation: fadeIn 1.5s ease-in-out forwards;
+    }
+
+    #meme img {
+        width: 260px;
+        border-radius: 20px;
+        margin-top: 15px;
+    }
+
+    @keyframes fadeIn {
+        from {opacity:0; transform: translateY(20px);}
+        to {opacity:1; transform: translateY(0);}
+    }
+
+    /* floating hearts */
+    .heart {
+        position: absolute;
+        color: rgba(255,255,255,0.7);
+        font-size: 20px;
+        animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+        from { transform: translateY(100vh); }
+        to { transform: translateY(-10vh); }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Will you be my Valentine? ❤️</h1>
+
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+
+    <div id="meme">
+        <h2>You just made my day 🥰</h2>
+        <p>Forever You & I ❤️</p>
+
+        <!-- replace thank.jpg with your image -->
+        <img src="hi.jpg" alt="flowers">
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const meme = document.getElementById("meme");
+
+    // move NO button away
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * (window.innerWidth - 120);
+        const y = Math.random() * (window.innerHeight - 60);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
+
+    // show romantic message
+    yesBtn.addEventListener("click", () => {
+        meme.style.display = "block";
+    });
+
+    // floating hearts
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (15 + Math.random()*20) + "px";
+        heart.style.animationDuration = (4 + Math.random()*4) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
